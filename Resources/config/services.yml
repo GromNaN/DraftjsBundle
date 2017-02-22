@@ -70,6 +70,18 @@ services:
         tags:
             - { name: draftjs.block_renderer, alias: draftjs_blockquote_block_renderer }
 
+    m6_web_draftjs.image_entity_renderer:
+        class: M6Web\Bundle\DraftjsBundle\Renderer\Entity\ImageEntityRenderer
+        parent: m6_web_draft_js.abstract_block_entity_renderer
+        tags:
+            - { name: draftjs.block_entity_renderer, alias: draftjs_image_entity_renderer }
+
+    m6_web_draftjs.inline_link_renderer:
+        class: M6Web\Bundle\DraftjsBundle\Renderer\Inline\InlineLinkRenderer
+        parent: m6_web_draft_js.abstract_block_renderer
+        tags:
+            - { name: draftjs.inline_entity_renderer, alias: draftjs_inline_link_renderer }
+
     # engine renderer
     m6_web_draftjs.html_renderer:
         class: M6Web\Bundle\DraftjsBundle\Renderer\HtmlRenderer

@@ -20,7 +20,10 @@ trait TestsContextTrait
     {
         $templating = new \mock\Symfony\Bundle\FrameworkBundle\Templating\EngineInterface();
         $templating->getMockController()->render = function ($filename, $params) {
-            return isset($params['content']) ? $params['content'] : '';
+            // the mock create a tag based on the file name.
+            return sprintf('<%1$s>%2$s</%1$s>',
+                strstr(ltrim(strrchr($filename, ':'), ':'), '.', true),
+                isset($params['content']) ? $params['content'] : '');
         };
 
         return $templating;
@@ -54,6 +57,9 @@ trait TestsContextTrait
         // inline entity guesser
         $inlineEntityGuesser = new \mock\M6Web\Bundle\DraftjsBundle\Guesser\InlineEntityGuesser();
 
+        $inlineLinkRenderer = new \mock\M6Web\Bundle\DraftjsBundle\Renderer\Inline\InlineLinkRenderer();
+        $inlineEntityGuesser->addRenderer($inlineLinkRenderer, 'inline_link_renderer');
+
         // content renderer
         $contentRenderer = new \mock\M6Web\Bundle\DraftjsBundle\Renderer\Content\ContentRenderer($inlineEntityGuesser);
 
@@ -63,6 +69,10 @@ trait TestsContextTrait
 
         // block entity guesser
         $blockEntityGuesser = new \mock\M6Web\Bundle\DraftjsBundle\Guesser\BlockEntityGuesser();
+
+        $imageEntityRenderer  = new \mock\M6Web\Bundle\DraftjsBundle\Renderer\Entity\ImageEntityRenderer($templating);
+
+        $blockEntityGuesser->addRenderer($imageEntityRenderer, 'image_entity_renderer');
 
         // add block renderer
         $atomicBlockRenderer = new \mock\M6Web\Bundle\DraftjsBundle\Renderer\Block\AtomicBlockRenderer($contentRenderer, $templating);

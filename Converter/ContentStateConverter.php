@@ -77,7 +77,7 @@ class ContentStateConverter implements ConverterInterface
             $type = $block['type'];
             $text = $block['text'];
             $depth = $block['depth'];
-            $data = $block['data'];
+            $data = array_key_exists('data', $block) ? $block['data'] : [];
 
             $characterList = $this->createCharacterList($text, $styles, $entities);
 
