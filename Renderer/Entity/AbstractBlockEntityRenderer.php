@@ -2,7 +2,7 @@
 
 namespace M6Web\Bundle\DraftjsBundle\Renderer\Entity;
 
-use Symfony\Component\Templating\EngineInterface;
+use Twig_Environment;
 
 /**
  * Class AbstractBlockEntityRenderer
@@ -12,9 +12,9 @@ use Symfony\Component\Templating\EngineInterface;
 abstract class AbstractBlockEntityRenderer implements BlockEntityRendererInterface
 {
     /**
-     * @var EngineInterface
+     * @var Twig_Environment
      */
-    protected $templating;
+    protected $twig;
 
     /**
      * @var string
@@ -24,11 +24,11 @@ abstract class AbstractBlockEntityRenderer implements BlockEntityRendererInterfa
     /**
      * AbstractEntityRenderer constructor.
      *
-     * @param EngineInterface $templating
+     * @param Twig_Environment $twig
      */
-    public function __construct(EngineInterface $templating)
+    public function __construct(Twig_Environment $twig)
     {
-        $this->templating = $templating;
+        $this->twig = $twig;
     }
 
     /**

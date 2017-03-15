@@ -30,12 +30,12 @@ services:
         abstract: true
         arguments:
             - '@m6_web_draftjs.content_renderer'
-            - '@templating'
+            - '@twig'
 
     m6_web_draft_js.abstract_block_entity_renderer:
         abstract: true
         arguments:
-            - '@templating'
+            - '@twig'
 
     # blocks renderers
     m6_web_draftjs.default_block_renderer:

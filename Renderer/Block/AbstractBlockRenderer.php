@@ -4,7 +4,7 @@ namespace M6Web\Bundle\DraftjsBundle\Renderer\Block;
 
 use M6Web\Bundle\DraftjsBundle\Renderer\Content\ContentRenderer;
 use M6Web\Bundle\DraftjsBundle\Renderer\Helper\BlockRendererHelperTrait;
-use Symfony\Component\Templating\EngineInterface;
+use Twig_Environment;
 
 /**
  * Class AbstractBlockRenderer
@@ -21,9 +21,9 @@ abstract class AbstractBlockRenderer implements BlockRendererInterface
     protected $contentRenderer;
 
     /**
-     * @var EngineInterface
+     * @var Twig_Environment
      */
-    protected $templating;
+    protected $twig;
 
     /**
      * @var string
@@ -39,12 +39,12 @@ abstract class AbstractBlockRenderer implements BlockRendererInterface
      * AbstractBlockRenderer constructor.
      *
      * @param ContentRenderer $contentRenderer
-     * @param EngineInterface $templating
+     * @param EngineInterface $twig
      */
-    public function __construct(ContentRenderer $contentRenderer, EngineInterface $templating)
+    public function __construct(ContentRenderer $contentRenderer, Twig_Environment $twig)
     {
         $this->contentRenderer = $contentRenderer;
-        $this->templating = $templating;
+        $this->twig = $twig;
     }
 
     /**
