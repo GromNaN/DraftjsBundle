@@ -56,7 +56,7 @@ class HeadingBlockRenderer extends AbstractBlockRenderer
 
         $content = $this->contentRenderer->render($contentBlock->getText(), $contentBlock->getCharacterList(), $entities);
 
-        return $this->twig->render('M6WebDraftjsBundle:Block:heading.html.twig', [
+        return $this->twig->render('@M6WebDraftjs/Block/heading.html.twig', [
             'tag' => $this::TAGS_NAME[$contentBlock->getType()],
             'classNames' => $this->buildClassNames($contentBlock),
             'content' => $content,

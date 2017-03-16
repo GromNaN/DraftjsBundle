@@ -60,7 +60,7 @@ class AtomicBlockRenderer extends AbstractBlockRenderer
             return $content;
         }
 
-        return $this->twig->render('M6WebDraftjsBundle:Block:default.html.twig', [
+        return $this->twig->render('@M6WebDraftjs/Block/atomic.html.twig', [
             'classNames' => $this->buildClassNames($contentBlock),
             'content' => $content,
         ]);

@@ -14,14 +14,13 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 trait TestsContextTrait
 {
     /**
-     * @return \mock\Symfony\Bundle\FrameworkBundle\Templating\EngineInterface
+     * @return \Twig_Environment
      */
-    private function getMockTwig()
+    private function getTwig()
     {
-        $twig = new \mock\Twig_Environment(new \Twig_Loader_Array());
-        $twig->getMockController()->render = function ($filename, $params) {
-            return isset($params['content']) ? $params['content'] : '';
-        };
+        $loader = new \Twig_Loader_Filesystem();
+        $loader->addPath(__DIR__.'/../../Resources/views', 'M6WebDraftjs');
+        $twig = new \Twig_Environment($loader);
 
         return $twig;
     }
@@ -49,7 +48,7 @@ trait TestsContextTrait
      */
     private function getMockBlockGuesser(array $inlineClassNames = [])
     {
-        $twig = $this->getMockTwig();
+        $twig = $this->getTwig();
 
         // inline entity guesser
         $inlineEntityGuesser = new \mock\M6Web\Bundle\DraftjsBundle\Guesser\InlineEntityGuesser();
@@ -66,11 +65,15 @@ trait TestsContextTrait
 
         // add block renderer
         $atomicBlockRenderer = new \mock\M6Web\Bundle\DraftjsBundle\Renderer\Block\AtomicBlockRenderer($contentRenderer, $twig);
+        $atomicBlockRenderer->setBlockClassName('atomic-block');
         $atomicBlockRenderer->setBlockEntityGuesser($blockEntityGuesser);
 
         $defaultBlockRenderer = new \mock\M6Web\Bundle\DraftjsBundle\Renderer\Block\DefaultBlockRenderer($contentRenderer, $twig);
+        $defaultBlockRenderer->setBlockClassName('default-block');
         $headingBlockRenderer = new \mock\M6Web\Bundle\DraftjsBundle\Renderer\Block\HeadingBlockRenderer($contentRenderer, $twig);
+        $headingBlockRenderer->setBlockClassName('heading-block');
         $listBlockRenderer = new \mock\M6Web\Bundle\DraftjsBundle\Renderer\Block\ListBlockRenderer($contentRenderer, $twig);
+        $listBlockRenderer->setBlockClassName('list-block');
 
         $blockGuesser = new \mock\M6Web\Bundle\DraftjsBundle\Guesser\BlockGuesser();
 

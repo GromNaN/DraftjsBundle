@@ -20,7 +20,7 @@ class BlockGuesser extends atoum
     {
         $inlineEntityGuesser = new \mock\M6Web\Bundle\DraftjsBundle\Guesser\InlineEntityGuesser();
         $contentRenderer = new \mock\M6Web\Bundle\DraftjsBundle\Renderer\Content\ContentRenderer($inlineEntityGuesser);
-        $twig = $this->getMockTwig();
+        $twig = $this->getTwig();
 
         $blockRenderer = new \mock\M6Web\Bundle\DraftjsBundle\Renderer\Block\DefaultBlockRenderer($contentRenderer, $twig);
 

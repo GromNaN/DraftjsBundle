@@ -29,7 +29,7 @@ class HtmlRenderer extends atoum
             ->if($renderer = new TestedClass($converter, $builder))
             ->then
                 ->string($renderer->render($rawState))
-                ->isEqualTo('He<span class="bold">ll</span>o world!')
+                ->isEqualTo("<div class=\"default-block\">\n    He<span class=\"bold\">ll</span>o world!\n</div>\n")
             ->then
                 ->mock($converter)->call('convertFromRaw')->withArguments($rawState)->once()
                 ->mock($builder)->call('build')->once()

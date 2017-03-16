@@ -24,7 +24,7 @@ class BlockquoteBlockRenderer extends AbstractBlockRenderer
 
         $content = $this->contentRenderer->render($contentBlock->getText(), $contentBlock->getCharacterList(), $entities);
 
-        return $this->twig->render('M6WebDraftjsBundle:Block:blockquote.html.twig', [
+        return $this->twig->render('@M6WebDraftjs/Block/blockquote.html.twig', [
             'classNames' => $this->buildClassNames($contentBlock),
             'content' => $content,
         ]);
